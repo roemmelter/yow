@@ -17,9 +17,16 @@ import android.provider.CalendarContract;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -28,9 +35,12 @@ import java.util.List;
 
 public class BackgroundUpdater extends Service {
 
+    private HashMap<Integer, EventProvider> analyzedEvents = new HashMap<Integer, EventProvider>();
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        fetchNewEvents();
+
+        fetchEvents();
         stopSelf();
         return Service.START_NOT_STICKY;
     }
@@ -40,17 +50,86 @@ public class BackgroundUpdater extends Service {
         return null;
     }
 
-    public void fetchNewEvents(){
+    public void fetchEvents(){
         Calendar start = Calendar.getInstance();
         Calendar end = Calendar.getInstance();
         end.add(Calendar.MONTH, 1);
 
-        List<EventProvider> availableEvents = findEventsInPeriod(start, end);
+        analyzedEvents = loadAnalyzedEvents();
 
-        if(availableEvents.size() != 0){
+        List<EventProvider> availableEvents = findEventsInPeriod(start, end);
+        List<EventProvider> newEvents = findNewEvents(availableEvents);
+        updateAnalyzedEvents(availableEvents);
+
+        saveAnalyzedEvents(analyzedEvents);
+
+
+        if(newEvents.size() != 0){
             sendNotification("Neue Reise gefunden", "Möchtest du direkt eine Zugverbindung buchen?", 123, MainActivity.class);
         }
 
+    }
+
+    public void saveAnalyzedEvents(HashMap<Integer, EventProvider> events){
+        try {
+        File file = new File(getDir("data", MODE_PRIVATE), "map");
+        ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(file));
+        outputStream.writeObject(events);
+            outputStream.flush();
+            outputStream.close();
+        }catch(IOException e){
+
+            throw(new RuntimeException(e.getMessage()));
+        }
+    }
+
+    public HashMap<Integer, EventProvider> loadAnalyzedEvents(){
+        HashMap<Integer, EventProvider> events = new HashMap<Integer, EventProvider>();
+
+        try {
+            File file = new File(getDir("data", MODE_PRIVATE), "map");
+
+            if(!file.exists()){
+                return events;
+            }
+
+
+                ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(file));
+
+          try {
+              events = (HashMap<Integer, EventProvider>) inputStream.readObject();
+          }catch(Exception e){
+
+          }
+
+
+        }catch(Exception e){
+            throw(new RuntimeException(e.getMessage()));
+        }
+
+        return events;
+    }
+
+    public void updateAnalyzedEvents(List<EventProvider> currentlyAnalyzedEvents){
+        this.analyzedEvents.clear();
+        for(EventProvider event : currentlyAnalyzedEvents){
+            this.analyzedEvents.put(event.id, event);
+        }
+    }
+
+
+    public List<EventProvider>findNewEvents(List<EventProvider> fetchedData){
+
+        List<EventProvider> newEvents = new ArrayList<EventProvider>();
+
+        for(EventProvider event : fetchedData){
+
+            if(analyzedEvents.get(event.id) == null){
+                newEvents.add(event);
+            }
+        }
+
+        return newEvents;
     }
 
     @Override
@@ -62,7 +141,9 @@ public class BackgroundUpdater extends Service {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setContentTitle(title)
+                        .setSmallIcon(R.drawable.ic_stat_card_travel)
                         .setContentText(text);
+
 
         //callback point on notification click
         Intent resultIntent = new Intent(this, classToOpen);
@@ -110,7 +191,7 @@ public class BackgroundUpdater extends Service {
             Cursor cur = this.getBaseContext().getContentResolver().query(CalendarContract.Events.CONTENT_URI, projection, selection, null, null);
 
             while(cur.moveToNext()){
-                EventProvider ep = new EventProvider(cur.getString(ID),cur.getString(TITLE), cur.getString(DESCRIPTION), new Date(cur.getLong(DTSTART)), new Date(cur.getLong(DTEND)));
+                EventProvider ep = new EventProvider(cur.getInt(ID),cur.getString(TITLE), cur.getString(DESCRIPTION), new Date(cur.getLong(DTSTART)), new Date(cur.getLong(DTEND)));
                 eventProvider.add(ep);
             }
 
