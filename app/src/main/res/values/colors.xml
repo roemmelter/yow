@@ -3,4 +3,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="top_title_bar">#C1C1C1</color>
+    <color name="bg_activity_main">#FFFFFF</color>
+    <color name="hr_activity_main">#000000</color>
+    <color name="font_top_title_bar">#FFFFFF</color>
 </resources>
