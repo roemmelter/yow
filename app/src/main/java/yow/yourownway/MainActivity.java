@@ -32,15 +32,17 @@ public class MainActivity extends AppCompatActivity {
 
 
         mWebView = (WebView) findViewById(R.id.activity_main_webview);
-        mWebView.loadUrl("https://www.google.de/");
 
+        // Force links and redirects to open in the WebView instead of in a browser
+        mWebView.setWebViewClient(new MyAppWebViewClient());
+        mWebView.loadUrl("https://www.google.com");
 
         // Enable Javascript
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
+/*
 
         startBackgroundUpdater();
-
 
     }
 
@@ -50,4 +52,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+<<<<<<< HEAD
+=======
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CALENDAR) == PackageManager.PERMISSION_GRANTED) {
+            cur = cr.query(uri, projection, null, null, null);
+
+            while (cur.moveToNext()) {
+                CalendarProvider cp = new CalendarProvider(cur.getLong(PROJECT_ID), cur.getString(DISPLAY_NAME), cur.getString(ACCOUNT_NAME), cur.getString(OWNER));
+                calenderProvider.add(cp);
+            }
+
+            return calenderProvider;
+
+        } else {
+            throw (new RuntimeException("No permissions"));
+        }
+*/
+/*
+        public void onBackPressed() {
+            if(mWebView.canGoBack()) {
+                mWebView.goBack();
+            } else {
+                super.onBackPressed();
+            }
+        }
+*/
+
+    }
+>>>>>>> 9a4f26a8c759e792349b7260dc26f4b89ca6d43a
 }
