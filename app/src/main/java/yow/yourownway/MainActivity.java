@@ -15,6 +15,13 @@ public class MainActivity extends AppCompatActivity {
 
         startBackgroundUpdater();
 
+
+
+    }
+
+
+    public void onBook(){
+
     }
 
     public void startBackgroundUpdater() {
