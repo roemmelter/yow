@@ -7,13 +7,15 @@ import java.util.Date;
  */
 public class EventProvider {
 
+    public String id;
     public String title;
     public String description;
     public Date start;
     public Date end;
 
-    public EventProvider(String title, String description, Date start, Date end){
+    public EventProvider(String id, String title, String description, Date start, Date end){
         this.title = title;
+        this.id = id;
         this.description = description;
         this.start = start;
         this.end = end;
