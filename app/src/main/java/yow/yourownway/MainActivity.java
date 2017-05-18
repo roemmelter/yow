@@ -34,10 +34,11 @@ public class MainActivity extends AppCompatActivity {
 
         // Force links and redirects to open in the WebView instead of in a browser
         mWebView.setWebViewClient(new MyAppWebViewClient());
-        mWebView.loadUrl("https://www.google.com");
+        mWebView.loadUrl("https://xd.adobe.com/view/730f4c2a-6ea5-4709-9784-b672b15dc76d/");
 
         // Enable Javascript
         WebSettings webSettings = mWebView.getSettings();
+
         webSettings.setJavaScriptEnabled(true);
 /*
 

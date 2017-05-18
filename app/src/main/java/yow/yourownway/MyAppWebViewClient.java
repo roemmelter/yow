@@ -2,6 +2,7 @@ package yow.yourownway;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -11,7 +12,9 @@ import android.webkit.WebViewClient;
 
 public class MyAppWebViewClient extends WebViewClient {
 
-    public boolean shouldOverrideUrlLoading(WebView view, String url) {
+    public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+        return false;
+        /*
         if(Uri.parse(url).getHost().endsWith("https://xd.adobe.com/view/730f4c2a-6ea5-4709-9784-b672b15dc76d/?fullscreen")) {
             return false;
         }
@@ -19,5 +22,6 @@ public class MyAppWebViewClient extends WebViewClient {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         view.getContext().startActivity(intent);
         return true;
+        */
     }
 }

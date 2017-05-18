@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">YOW!</string>
+    <string name="top_title_name">YOW!</string>
     <string name="title_home">Home</string>
     <string name="title_connections">Meine Verbindungsübersicht</string>
     <string name="title_dashboard">Dashboard</string>
