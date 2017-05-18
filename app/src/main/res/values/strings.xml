@@ -4,4 +4,5 @@
     <string name="title_connections">Meine Verbindungsübersicht</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="butten_main_activity">Jetzt buchen</string>
 </resources>

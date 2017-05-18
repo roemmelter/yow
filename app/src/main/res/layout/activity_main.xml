@@ -36,20 +36,25 @@
         android:visibility="visible"
         tools:background="@color/top_title_bar">
 
-        <EditText
-            android:id="@+id/editText2"
+        <TextView
+            android:id="@+id/testView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="0dp"
+            android:background="@color/top_title_bar"
+            android:enabled="true"
             android:fontFamily="serif"
             android:inputType="textPersonName"
+            android:paddingTop="10dp"
+            android:text="@string/top_title_name"
             android:textAlignment="center"
+            android:textColor="@color/font_top_title_bar"
             android:textSize="@dimen/activity_main_title_size"
             android:textStyle="italic"
             android:visibility="visible"
-            tools:background="@color/top_title_bar"
             tools:text="@string/top_title_name"
-            tools:textColor="@color/font_top_title_bar"
             tools:textSize="36sp" />
+
     </LinearLayout>
 
     <RelativeLayout
@@ -58,6 +63,7 @@
         tools:background="@color/bg_activity_main">
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="2px"
             android:layout_alignParentBottom="true"
@@ -66,7 +72,7 @@
             android:layout_marginBottom="54dp"
             android:background="@color/hr_activity_main"
             android:visibility="visible"
-            android:id="@+id/linearLayout">
+            android:orientation="horizontal">
 
         </LinearLayout>
 
@@ -100,6 +106,19 @@
             android:layout_marginBottom="-43dp"
             android:layout_marginRight="32dp"
             app:srcCompat="@drawable/gear" />
+
+        <Button
+            android:id="@+id/btn_book"
+            android:layout_width="180dp"
+            android:layout_height="50dp"
+            android:layout_above="@+id/linearLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="89dp"
+            android:enabled="true"
+            android:text="@string/butten_main_activity"
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            tools:clickable="true"
+            tools:textColor="@color/btn_book_color" />
 
     </RelativeLayout>
 
