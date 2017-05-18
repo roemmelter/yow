@@ -29,44 +29,6 @@
             android:textSize="@dimen/activity_main_title_size"/>
     -->
     <LinearLayout
-<<<<<<< HEAD
-        android:layout_width="293dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/editText3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Nürnberg" />
-
-        <EditText
-            android:id="@+id/editText4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Hamburg" />
-
-        <Button
-            android:id="@+id/b_booking"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:layout_weight="1"
-            android:text="Jetzt Buchen" />
-
-    </LinearLayout>
-
-</FrameLayout>
-=======
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:elevation="0dp"
@@ -89,7 +51,6 @@
             tools:textColor="@color/font_top_title_bar"
             tools:textSize="36sp" />
     </LinearLayout>
->>>>>>> b560a6890e89a9d1a2d3b982b8abc4ed1ff76512
 
     <RelativeLayout
         android:layout_width="match_parent"
