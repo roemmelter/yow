@@ -40,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 /*
+
+
+
+
         List<CalendarProvider> availableCalenders = getAvailableCalenders();
 
         Calendar start = Calendar.getInstance();
