@@ -22,21 +22,24 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-//    private WebView mWebView;
+    private WebView mWebView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-/*
+
+        mWebView = (WebView) findViewById(R.id.activity_main_webview);
+        mWebView.loadUrl("https://www.google.de/");
+
+
         // Enable Javascript
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
-        mWebView = (WebView) findViewById(R.id.activity_main_webview);
-        mWebView.loadUrl("https://www.google.de/");
-*/
+
+
 
         List<CalendarProvider> availableCalenders = getAvailableCalenders();
 
@@ -48,21 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         List<EventProvider> availableEvents = findEventsInPeriod(start, end);
 
-        // Debuging
-        /*
-            Output:
-            Fronleichnam
-            15.6.
-            16.6.
-            -> ???
-         */
-        while (availableEvents.iterator().hasNext() ) {
-            EventProvider event = availableEvents.iterator().next();
-            Log.d("event", event.title);
-            Log.d("description", event.description);
-            Log.d("startDate", event.start.toString());
-            Log.d("endDate", event.end.toString());
-        }
+
     }
 
     public List<EventProvider> findEventsInPeriod(Calendar begin, Calendar end) {
